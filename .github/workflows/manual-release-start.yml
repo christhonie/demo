@@ -1,0 +1,48 @@
+name: '⇻ GitFlow Release Start'
+
+on: 
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Target version for this release.'
+        required: true
+jobs:
+  release-start:
+    name: Release Start
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: maven
+    - name: Setup git for commits
+      run: |
+        git config user.name "GitHub Action"
+        git config user.email "noreply@github.com"
+    - name: Create release branch
+      run: |
+        mvn gitflow:release-start --batch-mode --no-transfer-progress -DreleaseVersion='${{ github.event.inputs.version }}' -DinstallProject=false
+    - name: Create Pull Request
+      id: cpr
+      uses: devops-infra/action-pull-request@v0.5.5
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        target_branch: main
+        title: Release PR - Version ${{ github.event.inputs.version }}
+        body: "**Created by manual action GitFlow Release Start**"
+        label: enhancement
+        draft: false
+        ignore_users: "dependabot"
+    - name: PR details
+      if: steps.cpr.outputs.pull-request-number
+      run: |
+        echo "Pull Request Number - ${{ steps.cpr.outputs.pr-number }}"
+        echo "Pull Request URL - ${{ steps.cpr.outputs.url }}"
