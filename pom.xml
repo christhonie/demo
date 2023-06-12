@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.1.0</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.example</groupId>
+	<artifactId>demo</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>demo</name>
+	<description>Demo project for Spring Boot</description>
+	<properties>
+		<java.version>17</java.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+					<groupId>com.amashchenko.maven.plugin</groupId>
+					<artifactId>gitflow-maven-plugin</artifactId>
+					<version>1.20.0</version>
+					<configuration>
+						<!-- Whether to print commands output into the console. -->
+						<verbose>true</verbose>
+						<!-- Whether to fetch remote branch and compare it with the local one. -->
+						<fetchRemote>true</fetchRemote>
+						<!-- Whether to call Maven install goal during the mojo execution. -->
+						<installProject>false</installProject>
+						<!-- Whether to push to the remote for release/feature/hotfix start -->
+						<pushRemote>false</pushRemote>
+						<!-- Whether to skip changing project version. -->
+						<skipFeatureVersion>true</skipFeatureVersion>
+
+
+						<!-- Git flow configuration. -->
+						<gitFlowConfig>
+							<productionBranch>main</productionBranch>
+							<developmentBranch>develop</developmentBranch>
+							<featureBranchPrefix>feature/</featureBranchPrefix>
+							<releaseBranchPrefix>release/</releaseBranchPrefix>
+							<hotfixBranchPrefix>hotfix/</hotfixBranchPrefix>
+							<supportBranchPrefix>support/</supportBranchPrefix>
+							<versionTagPrefix />
+							<origin>origin</origin>
+						</gitFlowConfig>
+
+						<!-- Git commit messages. -->
+						<commitMessages>
+							<featureStartMessage>Feature start. Set feature version to @{version}.</featureStartMessage>
+							<featureFinishMessage>Feature finished. Development version updated to @{version}.</featureFinishMessage>
+
+							<hotfixStartMessage>Hotfix start. Set hotfix version to @{version}.</hotfixStartMessage>
+							<hotfixFinishMessage>Hotfix now finished. Development version updated to @{version}.</hotfixFinishMessage>
+
+							<releaseStartMessage>Release start. Set release version to @{version}.</releaseStartMessage>
+							<releaseFinishMessage>Release now finished. Development version incremented to @{version}.</releaseFinishMessage>
+							<releaseFinishMergeMessage>Released v@{version}</releaseFinishMergeMessage>
+
+							<tagHotfixMessage>Tag hotfix @{version}</tagHotfixMessage>
+							<tagReleaseMessage>Tag release @{version}</tagReleaseMessage>
+						</commitMessages>
+					</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
