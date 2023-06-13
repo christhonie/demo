@@ -43,6 +43,7 @@ jobs:
         label: release
         draft: false
         ignore_users: "dependabot"
+        get_diff: false
     - name: PR details
       if: steps.cpr.outputs.pull-request-number
       run: |
