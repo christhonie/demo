@@ -41,7 +41,7 @@
 					<version>1.20.0</version>
 					<configuration>
 						<!-- Whether to print commands output into the console. -->
-						<verbose>true</verbose>
+						<verbose>false</verbose>
 						<!-- Whether to fetch remote branch and compare it with the local one. -->
 						<fetchRemote>true</fetchRemote>
 						<!-- Whether to call Maven install goal during the mojo execution. -->
