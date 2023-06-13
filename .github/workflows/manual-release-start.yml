@@ -34,18 +34,17 @@ jobs:
         mvn gitflow:release-start --batch-mode --no-transfer-progress -DreleaseVersion='${{ github.event.inputs.version }}' -DinstallProject=false
     - name: Create Pull Request
       id: cpr
-      uses: devops-infra/action-pull-request@v0.5.5
+      uses: peter-evans/create-pull-request@v5
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        target_branch: main
+        branch: release/${{ github.event.inputs.version }}
+        base: main
+        delete-branch: false
         title: Release PR - Version ${{ github.event.inputs.version }}
-        body: "**Created by manual action GitFlow Release Start**"
-        label: release
+        labels: |
+          release
         draft: false
-        ignore_users: "dependabot"
-        get_diff: false
     - name: PR details
       if: steps.cpr.outputs.pull-request-number
       run: |
-        echo "Pull Request Number - ${{ steps.cpr.outputs.pr-number }}"
-        echo "Pull Request URL - ${{ steps.cpr.outputs.url }}"
+        echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+        echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
