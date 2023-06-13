@@ -47,7 +47,7 @@
 						<!-- Whether to call Maven install goal during the mojo execution. -->
 						<installProject>false</installProject>
 						<!-- Whether to push to the remote for release/feature/hotfix start -->
-						<pushRemote>false</pushRemote>
+						<pushRemote>true</pushRemote>
 						<!-- Whether to skip changing project version. -->
 						<skipFeatureVersion>true</skipFeatureVersion>
 

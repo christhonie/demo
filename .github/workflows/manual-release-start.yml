@@ -33,18 +33,6 @@ jobs:
       run: |
         mvn gitflow:release-start --batch-mode --no-transfer-progress -DreleaseVersion='${{ github.event.inputs.version }}' -DinstallProject=false
     - name: Create Pull Request
-      id: cpr
-      uses: peter-evans/create-pull-request@v5
-      with:
-        branch: release/${{ github.event.inputs.version }}
-        base: main
-        delete-branch: false
-        title: Release PR - Version ${{ github.event.inputs.version }}
-        labels: |
-          release
-        draft: false
-    - name: PR details
-      if: steps.cpr.outputs.pull-request-number
-      run: |
-        echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
-        echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+      run: gh pr create -B main -H release/${{ github.event.inputs.version }} --title 'Release ${{ github.event.inputs.version }}' --body 'Release started using GitHub action GitFlow Release Start'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
