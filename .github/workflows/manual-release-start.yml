@@ -11,8 +11,7 @@ jobs:
     name: Release Start
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: write
+    permissions: write-all
 
     steps:
     - name: Checkout
