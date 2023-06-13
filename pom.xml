@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>demo</artifactId>
-	<version>0.0.1</version>
+	<version>1.0.13</version>
 	<name>demo</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -41,13 +41,13 @@
 					<version>1.20.0</version>
 					<configuration>
 						<!-- Whether to print commands output into the console. -->
-						<verbose>true</verbose>
+						<verbose>false</verbose>
 						<!-- Whether to fetch remote branch and compare it with the local one. -->
 						<fetchRemote>true</fetchRemote>
 						<!-- Whether to call Maven install goal during the mojo execution. -->
 						<installProject>false</installProject>
 						<!-- Whether to push to the remote for release/feature/hotfix start -->
-						<pushRemote>false</pushRemote>
+						<pushRemote>true</pushRemote>
 						<!-- Whether to skip changing project version. -->
 						<skipFeatureVersion>true</skipFeatureVersion>
 
